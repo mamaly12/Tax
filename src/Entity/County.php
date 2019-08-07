@@ -32,7 +32,7 @@ class County
      *      min = 0,
      *      max = 100,
      *      minMessage = "tax rate must be at least {{ limit }}",
-     *      maxMessage = "tax cannot be more than {{ limit }}"
+     *      maxMessage = "tax rate cannot be more than {{ limit }}"
      * )
      * @ORM\Column(type="float")
      */
