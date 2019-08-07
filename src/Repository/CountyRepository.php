@@ -49,8 +49,8 @@ class CountyRepository extends ServiceEntityRepository
         $connection = $em->getConnection();
         $statement = $connection->prepare("
         SELECT  co.name AS country, st.name AS state
-        ,SUM(cu.income *(cu.tax_rate/100)) AS overall_tax_per_state
-        ,AVG(cu.income *(cu.tax_rate/100)) AS average_tax_per_state
+        ,ROUND(SUM(cu.income *(cu.tax_rate/100)),2) AS overall_tax_per_state
+        ,ROUND(AVG(cu.income *(cu.tax_rate/100)),2) AS average_tax_per_state
         ,AVG(cu.tax_rate) AS average_county_tax_rate_per_state
         ,st.id AS state_id
         FROM county cu
@@ -73,7 +73,7 @@ class CountyRepository extends ServiceEntityRepository
         $em = $this->getEntityManager();
         $connection = $em->getConnection();
         $statement = $connection->prepare("SELECT co.name as country
-		,SUM(cu.income *(cu.tax_rate/100)) AS overall_tax_amount
+		,ROUND(SUM(cu.income *(cu.tax_rate/100)),2) AS overall_tax_amount
         ,SUM(cu.tax_rate) AS overall_tax_rate 
         ,co.id AS country_id
         FROM country AS co

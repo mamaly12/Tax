@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CountyRepository")
  */
@@ -28,11 +28,21 @@ class County
     private $state;
 
     /**
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 100,
+     *      minMessage = "tax rate must be at least {{ limit }}",
+     *      maxMessage = "tax cannot be more than {{ limit }}"
+     * )
      * @ORM\Column(type="float")
      */
     private $taxRate;
 
     /**
+     * @Assert\Range(
+     *      min = 0,
+     *      minMessage = "tax rate must be at least {{ limit }}"
+     * )
      * @ORM\Column(type="float")
      */
     private $income;
