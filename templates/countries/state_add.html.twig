@@ -1,0 +1,52 @@
+{% extends '/base.html.twig' %}
+
+{% block title  %} add state {% endblock %}
+
+{% block body %}
+        {{ form_start(form) }}
+        <table  border=2 bordercolor=green>
+            <tr>
+                <td>
+                    {{ form_label(form.name) }}
+                </td>
+                <td>
+                    {{ form_errors(form.name) }}
+                </td>
+                <td>
+                    {{ form_widget(form.name) }}
+                </td>
+            </tr>
+        </table>
+        {{ form_end(form) }}
+    <br>
+
+    {% if states %}
+        <table class="table table-striped" id="counties"  border=2 bordercolor=green>
+            <thead>
+            <tr>
+                <th style="text-align:center; width:50%;" colspan="2">
+                    Country: {{ country }}
+                </th>
+            </tr>
+            <tr>
+                <th style="text-align:center; width:50%;">name</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for state  in states %}
+                <tr>
+                    <td style="text-align:center">
+                        {{ state.name }}
+                    </td>
+                    <td>
+                        {% if is_granted('ROLE_ADMIN') and canAddState==true %}
+                            <a href="{{ path('add_county', {'stateId': state.id}) }}" class="btn btn-dark">Add county</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

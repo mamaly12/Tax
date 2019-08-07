@@ -1,24 +1,33 @@
-# Tax
+# Horse_Races
 
 STORIES
 ============
-• Develop a software that can be used to calculate statistics about the tax income of a country. The country is organized in 5 states and theses states are devided into counties.
+• Each horse has 3 stats: speed, strength, endurance
 
-• Each county has a different tax rate and collects a different amount of taxes.
+• Each stat ranges from 0.0 to 10.0
+
+• A horse's speed is their base speed (5 m/s) + their speed stat (in m/s)
+
+• Endurance represents how many hundreds of meters they can run at their best speed, before the weight of the jockey slows them down
+
+• A jockey slows the horse down by 5 m/s, but this effect is reduced by the horse's strength * 8 as a percentage
+
+• Each race is run by 8 randomly generated horses, over 1500m
+
+• Up to 3 races are allowed at the same time
 
 TODO
 ============
-The software should have the following features:
+There must be a webpage that include:
+• A "create race" button which generates a new race of 8 random horses
 
-• Output the overall amount of taxes collected per state
+• A button "progress" which advances all races by 10 "seconds" until all horses in the race have completed 1500m
 
-• Output the average amount of taxes collected per state
+• Any currently running races, showing distance covered, horse position, current time
 
-• Output the average county tax rate per state
+• The last 5 race results (top 3 positions and times to complete 1500m)
 
-• Output the average tax rate of the country 
-
-• Output the collected overall taxes of the country
+• The best ever time, and the stats of the horse that generated it
 
 REQUIREMENTS
 ============
@@ -42,7 +51,7 @@ INSTALLATION
 
 		a. composer update
 		
-		b. according to env file of the root of the project DATABASE_URL=mysql://mohammad:mohammad@127.0.0.1:3306/tax
+		b. according to env file of the root of the project DATABASE_URL=mysql://mohammad:mohammad@127.0.0.1:3306/usersmanegement
 		
 		create a user with password which has access to the database: DATABASE_URL=mysql://user_db:user_password@127.0.0.1:3306/dbName
 		
@@ -57,5 +66,4 @@ INSTALLATION
     a. php bin/console doctrine:migrations:diff
 
     b. php bin/console doctrine:migrations:migrate
-      
         

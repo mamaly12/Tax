@@ -1,0 +1,22 @@
+{% extends '/base.html.twig' %}
+
+{% block title  %} add state {% endblock %}
+
+{% block body %}
+        {{ form_start(form) }}
+        <table  border=2 bordercolor=green>
+            <tr>
+                <td>
+                    {{ form_label(form.name) }}
+                </td>
+                <td>
+                    {{ form_errors(form.name) }}
+                </td>
+                <td>
+                    {{ form_widget(form.name) }}
+                </td>
+            </tr>
+        </table>
+        {{ form_end(form) }}
+    <br>
+{% endblock %}

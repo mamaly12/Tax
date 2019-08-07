@@ -1,0 +1,92 @@
+{% extends '/base.html.twig' %}
+
+{% block title  %} Tax {% endblock %}
+
+{% block body %}
+
+    {% if is_granted('ROLE_ADMIN') and canAddCountry==true  %}
+        <a href="{{ path('add_country')}}" id="create-country-btn" class="btn btn-danger create-country">create country</a>
+    {% endif %}
+    <br>
+    <br>
+    {% if statistics %}
+        <table class="table table-striped" id="countries"  border=5 bordercolor=green>
+            <thead>
+            <tr>
+                <th colspan="5" style="text-align:center">
+                    CountryInfo
+                </th>
+            </tr>
+            <tr>
+                <th style="text-align:center">Country</th>
+                <th style="text-align:center">Overall tax rate</th>
+                <th style="text-align:center">Overall tax amount</th>
+                <th style="text-align:center">States info</th>
+                <th style="text-align:center">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for statistic in statistics %}
+                {% if  statistic.countryInfo%}
+                <tr>
+                    <td>
+                        {{ statistic.countryInfo.country is defined ? statistic.countryInfo.country : '-' }}
+                    </td>
+                    <td>
+                        {{ statistic.countryInfo.overall_tax_rate is defined ? statistic.countryInfo.overall_tax_rate : '-' }}
+                    </td>
+                    <td>
+                        {{ statistic.countryInfo.overall_tax_amount is defined ? statistic.countryInfo.overall_tax_amount : '-' }}
+                    </td>
+                    <td>
+                        {% if statistic.statesInfo %}
+                            <table border=5 bordercolor=green id="states">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Average county tax rate</th>
+                                    <th>Average tax </th>
+                                    <th>Overall tax</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for stateInfo in statistic.statesInfo %}
+                                    <tr>
+                                        <td>
+                                            {{ stateInfo.state is defined ? stateInfo.state : '-' }}
+                                        </td>
+                                        <td>
+                                            {{ stateInfo.average_county_tax_rate_per_state is defined ? stateInfo.average_county_tax_rate_per_state : '-' }}
+                                        </td>
+                                        <td>
+                                            {{ stateInfo.average_tax_per_state is defined ? stateInfo.average_tax_per_state : '-' }}
+                                        </td>
+                                        <td>
+                                            {{ stateInfo.overall_tax_per_state is defined ? stateInfo.overall_tax_per_state : '-' }}
+                                        </td>
+                                        <td>
+                                            {% if is_granted('ROLE_ADMIN') and canAddState==true %}
+                                                <a href="{{ path('add_county', {'stateId': stateInfo.state_id}) }}" class="btn btn-dark">Add county</a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if is_granted('ROLE_ADMIN') and canAddState==true %}
+                            <a href="{{ path('add_state', {'countryId': statistic.countryInfo.country_id}) }}" class="btn btn-dark">Add state</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p> No country exists</p>
+    {% endif %}
+{% endblock %}
