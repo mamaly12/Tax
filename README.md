@@ -44,8 +44,6 @@ INSTALLATION
 		
 		c. php bin/console doctrin:database:create
 
-    note: you can also use hcompetition.sql which is located in the root of project
-
 3- Create Table:
 
     -in the terminal of the IDE type these commands to create tables for the entities of the project:
