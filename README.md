@@ -6,6 +6,8 @@ STORIES
 
 • Each county has a different tax rate and collects a different amount of taxes.
 
+• There's also a refactoring task in the refactoring folder.
+
 TODO
 ============
 The software should have the following features:
