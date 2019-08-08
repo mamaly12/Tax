@@ -1,3 +1,6 @@
+# Refactoring
+• There's a refactoring task in the refatoring folder
+
 # Tax
 
 STORIES
@@ -5,8 +8,6 @@ STORIES
 • Develop a software that can be used to calculate statistics about the tax income of a country. The country is organized in 5 states and theses states are devided into counties.
 
 • Each county has a different tax rate and collects a different amount of taxes.
-
-• There's also a refactoring task in the refactoring folder.
 
 TODO
 ============
